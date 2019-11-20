@@ -8,25 +8,28 @@ class FullPost extends Component {
   state = {
     loadedPost: null
   };
-    componentDidUpdate() {
+  componentDidUpdate() {
     console.log("componentDidUpdate, id", this.props.id);
-
+// debugger
     if (this.props.id) {
+        // debugger
+        if (!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id != this.props.id)) {
         const url = "https://jsonplaceholder.typicode.com/posts/";
 
         axios.get(url + this.props.id).then(response => {
-        console.log(response);
-        const loadedPost = response.data;
-        this.setState({ loadedPost });
+          console.log(response);
+          const loadedPost = response.data;
+          this.setState({ loadedPost });
 
-        // const posts = response.data.slice(0, 4);
-        // const updatedPosts = posts.map(post => {
-        //   return {
-        //     ...post,
-        //     author: "Max"
-        //   };
-        // });
-      });
+          // const posts = response.data.slice(0, 4);
+          // const updatedPosts = posts.map(post => {
+          //   return {
+          //     ...post,
+          //     author: "Max"
+          //   };
+          // });
+        });
+      }
     }
     // this.setState({ id: this.props.id });
   }
