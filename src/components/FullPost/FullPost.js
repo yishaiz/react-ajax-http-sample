@@ -3,21 +3,22 @@ import React, { Component } from "react";
 import "./FullPost.css";
 import axios from "axios";
 
-
 class FullPost extends Component {
   state = {
     loadedPost: null
   };
   componentDidUpdate() {
     console.log("componentDidUpdate, id", this.props.id);
-// debugger
+
     if (this.props.id) {
-        // debugger
-        if (!this.state.loadedPost || (this.state.loadedPost && this.state.loadedPost.id != this.props.id)) {
+      if (
+        !this.state.loadedPost ||
+        (this.state.loadedPost && this.state.loadedPost.id != this.props.id)
+      ) {
         const url = "https://jsonplaceholder.typicode.com/posts/";
 
         axios.get(url + this.props.id).then(response => {
-          console.log(response);
+          //   console.log(response);
           const loadedPost = response.data;
           this.setState({ loadedPost });
         });

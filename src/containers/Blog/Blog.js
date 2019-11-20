@@ -16,19 +16,26 @@ class Blog extends Component {
   componentDidMount() {
     // console.log("ajax");
     const url = "https://jsonplaceholder.typicode.com/posts";
+    // const url = "https://jsonplaceholder.typicode.com/posts222";
 
-    axios.get(url).then(response => {
-      const posts = response.data.slice(0, 4);
-      const updatedPosts = posts.map(post => {
-        return {
-          ...post,
-          author: "Max"
-        };
+    axios
+      .get(url)
+      .then(response => {
+        const posts = response.data.slice(0, 4);
+        const updatedPosts = posts.map(post => {
+          return {
+            ...post,
+            author: "Max"
+          };
+        });
+
+        this.setState({ posts: updatedPosts });
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+        this.setState({ error: true });
       });
-
-      this.setState({ posts: updatedPosts });
-      console.log(response.data);
-    });
   }
 
   postSelectedHandler = id => {
@@ -39,7 +46,10 @@ class Blog extends Component {
   render() {
     // console.log(this.state.selectedPostId);
 
-    const posts = this.state.posts.map(post => {
+    let posts = <h1 style={{textAlign:'center', color:'red'}}>something went wrong !</h1>
+
+    if(!this.state.error){
+     posts = this.state.posts.map(post => {
       return (
         <Post
           key={post.id}
@@ -49,6 +59,7 @@ class Blog extends Component {
         ></Post>
       );
     });
+  }
 
     return (
       <div>
