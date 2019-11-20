@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./FullPost.css";
 import axios from "axios";
-import { stat } from "fs";
+
 
 class FullPost extends Component {
   state = {
@@ -20,18 +20,9 @@ class FullPost extends Component {
           console.log(response);
           const loadedPost = response.data;
           this.setState({ loadedPost });
-
-          // const posts = response.data.slice(0, 4);
-          // const updatedPosts = posts.map(post => {
-          //   return {
-          //     ...post,
-          //     author: "Max"
-          //   };
-          // });
         });
       }
     }
-    // this.setState({ id: this.props.id });
   }
 
   render() {
