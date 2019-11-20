@@ -8,22 +8,42 @@ import "./Blog.css";
 import axios from "axios";
 
 class Blog extends Component {
-    componentDidMount() {
-        // console.log("ajax");
+  state = {
+    posts: []
+  };
 
-        axios.get("https://jsonplaceholder.typicode.com/posts")
-            .then(response => {
-            console.log({ response });
-            });
-    }
+  componentDidMount() {
+    // console.log("ajax");
+    const url = "https://jsonplaceholder.typicode.com/posts";
+
+    axios.get(url).then(response => {
+      const posts = response.data.slice(0, 4);
+      const updatedPosts = posts.map(post => {
+        return {
+          ...post,
+          author: "Max"
+        };
+      });
+
+      this.setState({ posts: updatedPosts });
+      console.log(response.data);
+    });
+  }
 
   render() {
+    const posts = this.state.posts.map(post => {
+      return (
+        <Post key={post.id} title={post.title} author={post.author}></Post>
+      );
+    });
+
     return (
       <div>
         <section className="Posts">
+          {posts}
+          {/* <Post />
           <Post />
-          <Post />
-          <Post />
+          <Post /> */}
         </section>
         <section>
           <FullPost />
