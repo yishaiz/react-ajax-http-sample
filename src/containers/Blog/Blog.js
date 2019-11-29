@@ -5,7 +5,8 @@ import FullPost from "../../components/FullPost/FullPost";
 import NewPost from "../../components/NewPost/NewPost";
 import "./Blog.css";
 
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../axios";
 
 class Blog extends Component {
   state = {
@@ -15,8 +16,9 @@ class Blog extends Component {
 
   componentDidMount() {
     // console.log("ajax");
-    const url = "https://jsonplaceholder.typicode.com/posts";
-    // const url = "https://jsonplaceholder.typicode.com/posts222";
+    // const url = "https://jsonplaceholder.typicode.com/posts";
+    const url = "/posts";
+  // const url = "https://jsonplaceholder.typicode.com/posts222";
 
     axios
       .get(url)
@@ -24,7 +26,7 @@ class Blog extends Component {
         const posts = response.data.slice(0, 4);
         const updatedPosts = posts.map(post => {
           return {
-            ...post,
+          ...post,
             author: "Max"
           };
         });

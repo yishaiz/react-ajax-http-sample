@@ -1,10 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import axios from "axios";
+
+
+// axios.defaults.baseURL = "https://jsonplaceholder.typicode.com";
+axios.defaults.headers.common['Authorization'] = "AUTH TOKEN";
+axios.defaults.headers.post['Content-Type'] = "application/json";
+
+
+
+
+axios.interceptors.request.use(
+  request => {
+    console.log({ request });
+    return request;
+  },
+  error => {
+    debugger;
+    console.log({ error });
+    return Promise.reject(error);
+  }
+);
+
+axios.interceptors.response.use(
+  response => {
+    console.log({ response });
+    return response;
+  },
+  error => {
+    console.log({ error });
+    return Promise.reject(error);
+  }
+);
+
+// const myInterceptor = axios.interceptors.request.use(function () {/*...*/});
+
+// axios.interceptors.request.eject(myInterceptor);
+
+ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

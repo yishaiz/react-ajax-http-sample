@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
 import "./FullPost.css";
-import axios from "axios";
+// import axios from "axios";
+import {anotherInstance as axios} from "../../axios";
 
 class FullPost extends Component {
   state = {
@@ -15,7 +16,8 @@ class FullPost extends Component {
         !this.state.loadedPost ||
         (this.state.loadedPost && this.state.loadedPost.id != this.props.id)
       ) {
-        const url = "https://jsonplaceholder.typicode.com/posts/";
+        const url = "/posts/";
+        // const url = "https://jsonplaceholder.typicode.com/posts/";
 
         axios.get(url + this.props.id).then(response => {
           //   console.log(response);
